@@ -18,7 +18,7 @@ const COMMITS_CSV_FILE = "commits.csv";
 const BOT_USER_TO_FILTER = "dependabot[bot]";
 
 // Optional: GitHub Personal Access Token (PAT)
-// If you have a PAT, uncomment the line below and replace "your_github_pat_here" with your token
+// If you have a PAT, replace "your_github_pat_here" with your token on the line below
 // This will significantly increase your rate limit
 const GITHUB_TOKEN = "your_github_pat_here";
 
@@ -333,6 +333,7 @@ const processAllCommits = async () => {
 
 async function main() {
     console.log(`Starting GitHub repository data fetch for ${REPO_OWNER}/${REPO_NAME}`);
+    
     if (typeof GITHUB_TOKEN !== "undefined" && GITHUB_TOKEN && GITHUB_TOKEN !== "your_github_pat_here") {
         console.log("Using GitHub Personal Access Token for authentication");
     } else {
@@ -341,12 +342,13 @@ async function main() {
         console.warn("For extensive data fetching, generate a GitHub Personal Access Token,");
         console.warn("uncomment the 'GITHUB_TOKEN' line, and replace 'your_github_pat_here' with your token");
     }
+    
     console.log("====================================================\n");
 
     await processAllContributors();
     await processAllCommits();
 
-    console.log('\nFinished fetching and writing all data');
+    console.log("\nFinished fetching and writing all data");
     console.log(`Output files: ${CONTRIBUTORS_CSV_FILE}, ${COMMITS_CSV_FILE}`);
 }
 
